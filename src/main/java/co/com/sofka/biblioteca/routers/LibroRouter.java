@@ -1,10 +1,7 @@
 package co.com.sofka.biblioteca.routers;
 
 import co.com.sofka.biblioteca.model.LibroDTO;
-import co.com.sofka.biblioteca.usecases.ActualizarLibroUseCase;
-import co.com.sofka.biblioteca.usecases.CrearLibroUseCase;
-import co.com.sofka.biblioteca.usecases.ListarLibrosUseCase;
-import co.com.sofka.biblioteca.usecases.ObtenerLibroUseCase;
+import co.com.sofka.biblioteca.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -51,7 +48,7 @@ public class LibroRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> actualizar(ActualizarLibroUseCase actualizarLibroUseCase){
+    public RouterFunction<ServerResponse> actualizarLibro(ActualizarLibroUseCase actualizarLibroUseCase){
         Function<LibroDTO, Mono<ServerResponse>> executor = libroDTO -> actualizarLibroUseCase.apply(libroDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,4 +61,13 @@ public class LibroRouter {
         );
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> eliminarLibro(EliminarLibroUseCase eliminarLibroUseCase) {
+        return route(
+                DELETE("/eliminar/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.accepted()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(eliminarLibroUseCase.apply(request.pathVariable("id")), Void.class))
+        );
+    }
 }

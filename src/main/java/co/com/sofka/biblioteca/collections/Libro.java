@@ -14,8 +14,8 @@ public class Libro {
     private String tipo;
     private String areaTematica;
     private Integer unidadesDisponibles;
-    private Integer unidadesPrestadas;
-    private LocalDate fechaUltimoPrestamo;
+    private Integer unidadesPrestadas = 0;
+    private LocalDate fechaUltimoPrestamo = null;
 
     public Libro() {
     }

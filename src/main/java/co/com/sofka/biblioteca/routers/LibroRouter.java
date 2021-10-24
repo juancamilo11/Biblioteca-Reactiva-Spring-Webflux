@@ -103,4 +103,13 @@ public class LibroRouter {
                         .body(BodyInserters.fromPublisher(recomendarPorTipoYAreaTematicaUseCase.get(request.pathVariable("tipo"),request.pathVariable("areaTematica")), LibroDTO.class)));
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> prestarLibro(PrestarLibroUseCase prestarLibroUseCase){
+        return  route(
+                PUT("/prestarLibro/{id}"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(prestarLibroUseCase.apply(request.pathVariable("id")), String.class)));
+    }
+
 }

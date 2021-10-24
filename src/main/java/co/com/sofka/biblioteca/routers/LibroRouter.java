@@ -87,4 +87,12 @@ public class LibroRouter {
                         .body(BodyInserters.fromPublisher(recomendarPorTipoUseCase.get(request.pathVariable("tipo")), LibroDTO.class)));
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> listarLibrosPorAreaTematica(RecomendarPorAreaTematica recomendarPorAreaTematica) {
+        return route(GET("/librosPorAreaTematica/{areaTematica}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(recomendarPorAreaTematica.get(request.pathVariable("areaTematica")), LibroDTO.class)));
+    }
+
 }

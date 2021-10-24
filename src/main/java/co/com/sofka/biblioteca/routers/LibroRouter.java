@@ -70,4 +70,13 @@ public class LibroRouter {
                         .body(BodyInserters.fromPublisher(eliminarLibroUseCase.apply(request.pathVariable("id")), Void.class))
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> verificarDisponibilidad(VerificarDisponibilidadUseCase verificarDisponibilidadUseCase) {
+        return route(GET("/disponibilidad/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(verificarDisponibilidadUseCase.apply(request.pathVariable("id")), String.class)));
+    }
+
 }

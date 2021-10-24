@@ -9,5 +9,7 @@ import reactor.core.publisher.Flux;
 public interface BookRepository extends ReactiveMongoRepository<Libro, String> {
     Flux<Libro> findAllByTipo(String tipo);
     Flux<Libro> findAllByCategoria(String categoria);
+    Flux<Libro> findAllByCategoriaAndTipo(String categoria, String tipo);
+
 }
 

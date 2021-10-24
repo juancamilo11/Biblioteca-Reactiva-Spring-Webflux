@@ -6,13 +6,13 @@ import java.time.LocalDate;
 public class LibroDTO {
 
     @NotBlank(message="Debe existir el Id para este libro")
-    private String userId;
+    private String id;
     @NotBlank(message="Debe existir el nombre para este libro")
     private String nombre;
     @NotBlank(message="Debe existir el tipo para este libro")
     private String tipo;
     @NotBlank(message="Debe existir la categoria para este libro")
-    private String categoria;
+    private String areaTematica;
     @NotBlank(message="Debe existir las unidades disponibles para este libro")
     private Integer unidadesDisponibles;
     private Integer unidadesPrestadas;
@@ -21,26 +21,26 @@ public class LibroDTO {
     public LibroDTO() {
     }
 
-    public LibroDTO(String userId) {
-        this.userId = userId;
+    public LibroDTO(String id) {
+        this.id = id;
     }
 
-    public LibroDTO(String userId, String nombre, String tipo, String categoria, Integer unidadesDisponibles, Integer unidadesPrestadas, LocalDate fechaUltimoPrestamo) {
-        this.userId = userId;
+    public LibroDTO(String id, String nombre, String tipo, String categoria, Integer unidadesDisponibles, Integer unidadesPrestadas, LocalDate fechaUltimoPrestamo) {
+        this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.categoria = categoria;
+        this.areaTematica = categoria;
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesPrestadas = unidadesPrestadas;
         this.fechaUltimoPrestamo = fechaUltimoPrestamo;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -59,12 +59,12 @@ public class LibroDTO {
         this.tipo = tipo;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getAreaTematica() {
+        return areaTematica;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setAreaTematica(String areaTematica) {
+        this.areaTematica = areaTematica;
     }
 
     public Integer getUnidadesDisponibles() {

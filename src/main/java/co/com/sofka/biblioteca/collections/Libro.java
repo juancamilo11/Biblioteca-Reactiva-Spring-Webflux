@@ -12,7 +12,7 @@ public class Libro {
     private String id;
     private String nombre;
     private String tipo;
-    private String categoria;
+    private String areaTematica;
     private Integer unidadesDisponibles;
     private Integer unidadesPrestadas;
     private LocalDate fechaUltimoPrestamo;
@@ -24,14 +24,14 @@ public class Libro {
         this.id = id;
     }
 
-    public Libro(String id, String nombre, String tipo, String categoria, Integer unidadesDisponibles, Integer unidadesPrestadas, LocalDate fechaUltimoPrestamo) {
+    public Libro(String id, String nombre, String tipo, String categoria, Integer unidadesDisponibles) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.categoria = categoria;
+        this.areaTematica = categoria;
         this.unidadesDisponibles = unidadesDisponibles;
-        this.unidadesPrestadas = unidadesPrestadas;
-        this.fechaUltimoPrestamo = fechaUltimoPrestamo;
+        this.unidadesPrestadas = 0;
+        this.fechaUltimoPrestamo = null;
     }
 
     public String getId() {
@@ -58,12 +58,12 @@ public class Libro {
         this.tipo = tipo;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getAreaTematica() {
+        return areaTematica;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setAreaTematica(String areaTematica) {
+        this.areaTematica = areaTematica;
     }
 
     public Integer getUnidadesDisponibles() {

@@ -3,6 +3,7 @@ package co.com.sofka.biblioteca.routers;
 import co.com.sofka.biblioteca.model.LibroDTO;
 import co.com.sofka.biblioteca.usecases.CrearLibroUseCase;
 import co.com.sofka.biblioteca.usecases.ListarLibrosUseCase;
+import co.com.sofka.biblioteca.usecases.ObtenerLibroUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -38,5 +39,13 @@ public class LibroRouter {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(listarLibrosUseCase.get(), LibroDTO.class)));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> obtenerLibro(ObtenerLibroUseCase obtenerLibroUseCase) {
+        return route(GET("/libro/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(obtenerLibroUseCase.apply(request.pathVariable("id")), LibroDTO.class)));
     }
 }

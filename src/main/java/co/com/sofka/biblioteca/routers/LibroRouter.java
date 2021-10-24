@@ -88,11 +88,19 @@ public class LibroRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> listarLibrosPorAreaTematica(RecomendarPorAreaTematica recomendarPorAreaTematica) {
+    public RouterFunction<ServerResponse> listarLibrosPorAreaTematica(RecomendarPorAreaTematicaUseCase recomendarPorAreaTematicaUseCase) {
         return route(GET("/librosPorAreaTematica/{areaTematica}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(recomendarPorAreaTematica.get(request.pathVariable("areaTematica")), LibroDTO.class)));
+                        .body(BodyInserters.fromPublisher(recomendarPorAreaTematicaUseCase.get(request.pathVariable("areaTematica")), LibroDTO.class)));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> listarLibrosPorTipoYAreaTematica(RecomendarPorTipoYAreaTematicaUseCase recomendarPorTipoYAreaTematicaUseCase) {
+        return route(GET("/librosPorTipoYAreaTematica/{tipo}/{areaTematica}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(recomendarPorTipoYAreaTematicaUseCase.get(request.pathVariable("tipo"),request.pathVariable("areaTematica")), LibroDTO.class)));
     }
 
 }

@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux;
 public interface LibroRepositorio extends ReactiveCrudRepository<Libro, String> {
     Flux<Libro> findAllByTipo(String tipo);
     Flux<Libro> findAllByAreaTematica(String categoria);
-    Flux<Libro> findAllByAreaTematicaAndTipo(String categoria, String tipo);
+    Flux<Libro> findAllByTipoAndAreaTematica(String tipo, String areaTematica);
 
 }
 

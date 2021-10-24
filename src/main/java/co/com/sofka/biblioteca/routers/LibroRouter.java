@@ -112,4 +112,13 @@ public class LibroRouter {
                         .body(BodyInserters.fromPublisher(prestarLibroUseCase.apply(request.pathVariable("id")), String.class)));
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> devolverLibro(DevolverLibroUseCase devolverLibroUseCase){
+        return  route(
+                PUT("/devolverLibro/{id}"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(devolverLibroUseCase.apply(request.pathVariable("id")), String.class)));
+    }
+
 }

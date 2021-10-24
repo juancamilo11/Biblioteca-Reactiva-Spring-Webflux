@@ -79,4 +79,12 @@ public class LibroRouter {
                         .body(BodyInserters.fromPublisher(verificarDisponibilidadUseCase.apply(request.pathVariable("id")), String.class)));
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> listarLibrosPorTipo(RecomendarPorTipoUseCase recomendarPorTipoUseCase) {
+        return route(GET("/librosPorTipo/{tipo}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(recomendarPorTipoUseCase.get(request.pathVariable("tipo")), LibroDTO.class)));
+    }
+
 }

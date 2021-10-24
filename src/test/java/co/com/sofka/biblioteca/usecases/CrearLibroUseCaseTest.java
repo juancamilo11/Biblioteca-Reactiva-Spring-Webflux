@@ -35,7 +35,7 @@ class GuardarRecursoUseCaseTest {
     private WebTestClient webTestClient;
 
     @Test
-    void testRouterCrearRecurso() {
+    void crearLibroTest() {
         // Arrange
         Libro libro = new Libro();
 

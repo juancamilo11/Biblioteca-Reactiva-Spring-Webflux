@@ -1,6 +1,7 @@
 package co.com.sofka.biblioteca.routers;
 
 import co.com.sofka.biblioteca.model.LibroDTO;
+import co.com.sofka.biblioteca.usecases.ActualizarLibroUseCase;
 import co.com.sofka.biblioteca.usecases.CrearLibroUseCase;
 import co.com.sofka.biblioteca.usecases.ListarLibrosUseCase;
 import co.com.sofka.biblioteca.usecases.ObtenerLibroUseCase;
@@ -48,4 +49,19 @@ public class LibroRouter {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(obtenerLibroUseCase.apply(request.pathVariable("id")), LibroDTO.class)));
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> actualizar(ActualizarLibroUseCase actualizarLibroUseCase){
+        Function<LibroDTO, Mono<ServerResponse>> executor = libroDTO -> actualizarLibroUseCase.apply(libroDTO)
+                .flatMap(result -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(result));
+
+        return route(PUT("/actualizar")
+                        .and(accept(MediaType.APPLICATION_JSON)), request -> request
+                        .bodyToMono(LibroDTO.class)
+                        .flatMap(executor)
+        );
+    }
+
 }
